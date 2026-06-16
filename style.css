@@ -1,0 +1,498 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #fffafc;
+    color: #6b5663;
+}
+
+
+.opening {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background:
+        radial-gradient(circle at 18% 20%, #ffe3ef, transparent 30%),
+        radial-gradient(circle at 82% 72%, #eee1ff, transparent 30%),
+        radial-gradient(circle at 50% 88%, #fff0c7, transparent 24%),
+        #fffafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.8s;
+}
+
+.opening.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.opening-card {
+    position: relative;
+    width: min(560px, 88%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 56px 36px;
+    border-radius: 42px;
+    text-align: center;
+    border: 2px solid #ffe1ee;
+    box-shadow: 0 20px 55px rgba(232, 160, 200, 0.24);
+}
+
+.opening-card::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 32px;
+    border: 2px dashed #f4c6dc;
+    pointer-events: none;
+}
+
+.mini {
+    color: #c58bab;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.opening-card h1 {
+    color: #8d6678;
+    font-size: 42px;
+    margin: 18px 0;
+}
+
+.opening-card p {
+    color: #9a7b8b;
+    margin-bottom: 28px;
+}
+
+button {
+    border: none;
+    background: #ffd9e8;
+    color: #805d70;
+    padding: 14px 30px;
+    border-radius: 999px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(232, 160, 200, 0.2);
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #ffc9df;
+    transform: translateY(-3px);
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.deco {
+    position: absolute;
+    font-size: 30px;
+    animation: floaty 3s ease-in-out infinite;
+}
+
+.d1 {
+    top: -18px;
+    left: 24px;
+}
+
+.d2 {
+    top: -20px;
+    right: 30px;
+}
+
+.d3 {
+    bottom: 20px;
+    left: -12px;
+}
+
+.d4 {
+    bottom: 16px;
+    right: -10px;
+}
+
+@keyframes floaty {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.page {
+    min-height: 100vh;
+    padding: 90px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transition-page {
+    background:
+        radial-gradient(circle at 20% 20%, #ffe8f2, transparent 30%),
+        radial-gradient(circle at 80% 75%, #efe3ff, transparent 28%),
+        #fffafc;
+    text-align: center;
+}
+
+.transition-box p {
+    font-size: 38px;
+    line-height: 2;
+    color: #8d6678;
+    font-weight: 300;
+}
+
+.transition-box span {
+    display: block;
+    margin-top: 45px;
+    color: #c8a2b8;
+    letter-spacing: 4px;
+    font-size: 14px;
+}
+
+.memory-page {
+    background:
+        radial-gradient(circle at 15% 20%, #ffe1ef, transparent 28%),
+        radial-gradient(circle at 85% 75%, #eee0ff, transparent 30%),
+        linear-gradient(180deg, #fff1f7, #fbf4ff);
+    flex-direction: column;
+}
+
+.book {
+    width: min(790px, 100%);
+    background: #fffdfd;
+    border-radius: 38px;
+    padding: 38px;
+    border: 2px solid #ffe1ee;
+    box-shadow: 0 22px 60px rgba(210, 160, 210, 0.2);
+    position: relative;
+}
+
+.book::before {
+    content: "♡";
+    position: absolute;
+    top: 20px;
+    left: 26px;
+    color: #e4a4c0;
+    font-size: 26px;
+}
+
+.book::after {
+    content: "✦";
+    position: absolute;
+    right: 30px;
+    bottom: 24px;
+    color: #c8a8ff;
+    font-size: 24px;
+}
+
+.book-title {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.book-title h2 {
+    color: #8d6678;
+    font-size: 36px;
+    margin-top: 12px;
+}
+
+.book-sub {
+    color: #b0869d;
+    margin-top: 10px;
+}
+
+.book-page {
+    display: none;
+    min-height: 460px;
+    padding: 32px;
+    border-radius: 30px;
+    background:
+        linear-gradient(#fff8fb 0 0) padding-box,
+        repeating-linear-gradient(-45deg,
+            #ffd9e8 0 8px,
+            #efe0ff 8px 16px) border-box;
+    border: 6px solid transparent;
+    animation: pagePop 0.45s ease;
+    position: relative;
+}
+
+.book-page.active {
+    display: block;
+}
+
+.book-page::before {
+    content: "🦊";
+    position: absolute;
+    top: -18px;
+    right: 24px;
+    background: white;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 20px rgba(210, 160, 210, 0.18);
+}
+
+.date {
+    position: relative;
+
+    display: inline-block;
+    background: #ffe3ef;
+    color: #b86f93;
+    padding: 12px 14px;
+    border-radius: 999px;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.date::before {
+    content: "🐷";
+
+    position: absolute;
+
+    top: -5px;
+    left: -5px;
+
+    font-size: 16px;
+}
+
+.text {
+    width: fit-content;
+    max-width: 92%;
+    background: white;
+    padding: 18px 22px;
+    border-radius: 24px 24px 24px 6px;
+    line-height: 1.9;
+    color: #6b5663;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 22px rgba(210, 160, 210, 0.12);
+}
+
+.small-text {
+    color: #9a7b8b;
+    line-height: 1.8;
+    margin-bottom: 18px;
+}
+
+.memory-img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    display: block;
+    background: white;
+    padding: 12px 12px 38px;
+    border-radius: 18px;
+    box-shadow: 0 14px 28px rgba(210, 160, 210, 0.18);
+    transform: rotate(-1deg);
+}
+
+.letter-page-inner {
+    background: #fffdf9;
+    border-color: #ffe3ee;
+}
+
+.letter-page-inner h3 {
+    color: #8d6678;
+    font-size: 28px;
+    margin: 10px 0 22px;
+}
+
+.letter-text {
+    white-space: pre-line;
+    line-height: 2.1;
+    color: #5f5360;
+}
+
+.book-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.book-buttons button {
+    flex: 1;
+}
+
+.page-count {
+    text-align: center;
+    margin-top: 18px;
+    color: #c58bab;
+    font-size: 14px;
+}
+
+@keyframes pagePop {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ending-page {
+    background:
+        radial-gradient(circle at 50% 38%, #ffe1ee, transparent 30%),
+        radial-gradient(circle at 78% 70%, #eee0ff, transparent 28%),
+        #fffafc;
+    text-align: center;
+}
+
+.ending-box {
+    width: min(680px, 100%);
+}
+
+.ending-main {
+    font-size: 30px;
+    color: #8d6678;
+    line-height: 1.9;
+    margin-bottom: 28px;
+}
+
+.ending-card {
+    background: white;
+    padding: 20px 28px;
+    border-radius: 28px;
+    margin-bottom: 18px;
+    border: 2px solid #ffe1ee;
+    box-shadow: 0 12px 32px rgba(232, 160, 200, 0.14);
+}
+
+.ending-card span {
+    display: block;
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.ending-card p {
+    color: #7b6673;
+}
+
+.ending-page h2 {
+    color: #c58bab;
+    font-size: 36px;
+    margin-top: 26px;
+}
+
+.pig {
+    font-size: 28px;
+    margin-top: 18px;
+}
+
+@media (max-width: 768px) {
+    .opening-card h1 {
+        font-size: 32px;
+    }
+
+    .transition-box p {
+        font-size: 28px;
+    }
+
+    .book {
+        padding: 26px;
+    }
+
+    .book-page {
+        padding: 24px;
+    }
+
+    .book-title h2 {
+        font-size: 30px;
+    }
+
+    .ending-main {
+        font-size: 24px;
+    }
+}
+
+.final-message {
+    margin-top: 60px;
+
+    padding-top: 40px;
+
+    border-top: 2px dashed #f3c6dc;
+
+    text-align: center;
+}
+
+.final-text {
+    color: #8d6678;
+
+    font-size: 28px;
+
+    line-height: 2.1;
+
+    font-weight: 300;
+}
+
+.final-text.second {
+    margin-top: 40px;
+}
+
+.gift-icons {
+    font-size: 42px;
+
+    margin-top: 34px;
+
+    animation: floaty 3s ease-in-out infinite;
+}
+
+.gift-page-inner {
+    text-align: center;
+    background: #fffdfd;
+}
+
+.gift-text {
+    color: #8d6678;
+
+    font-size: 20px;
+
+    line-height: 2.2;
+
+    font-weight: 400;
+
+    margin-top: 34px;
+}
+
+.gift-text.second {
+    margin-top: 28px;
+}
+
+.gift-text.second {
+    margin-top: 45px;
+}
+
+.gift-icons {
+    font-size: 34px;
+
+    margin-top: 28px;
+
+    animation: floaty 3s ease-in-out infinite;
+}
+
+.scroll-tip {
+    font-size: 11px !important;
+    color: rgba(107, 86, 99, 0.45) !important;
+    text-align: center !important;
+    margin-top: 50px !important;
+    letter-spacing: 1px !important;
+    font-weight: 400 !important;
+}

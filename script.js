@@ -1,0 +1,42 @@
+const opening = document.getElementById("opening");
+const enterBtn = document.getElementById("enterBtn");
+const bgMusic = document.getElementById("bgMusic");
+
+enterBtn.addEventListener("click", () => {
+    opening.classList.add("hide");
+    bgMusic.volume = 0.3;
+    bgMusic.play();
+});
+
+const pages = document.querySelectorAll(".book-page");
+const prevBtn = document.getElementById("prevPageBtn");
+const nextBtn = document.getElementById("nextPageBtn");
+const pageCount = document.getElementById("pageCount");
+
+let pageIndex = 0;
+
+function showPage(index) {
+    pages.forEach(page => page.classList.remove("active"));
+    pages[index].classList.add("active");
+
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === pages.length - 1;
+
+    pageCount.innerText = `${index + 1} / ${pages.length}`;
+}
+
+prevBtn.addEventListener("click", () => {
+    if (pageIndex > 0) {
+        pageIndex--;
+        showPage(pageIndex);
+    }
+});
+
+nextBtn.addEventListener("click", () => {
+    if (pageIndex < pages.length - 1) {
+        pageIndex++;
+        showPage(pageIndex);
+    }
+});
+
+showPage(pageIndex);
