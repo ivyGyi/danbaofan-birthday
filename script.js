@@ -16,13 +16,18 @@ const pageCount = document.getElementById("pageCount");
 let pageIndex = 0;
 
 function showPage(index) {
-    pages.forEach(page => page.classList.remove("active"));
-    pages[index].classList.add("active");
+  pages.forEach(page => page.classList.remove("active"));
+  pages[index].classList.add("active");
 
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = index === pages.length - 1;
+  prevBtn.disabled = index === 0;
+  nextBtn.disabled = index === pages.length - 1;
 
-    pageCount.innerText = `${index + 1} / ${pages.length}`;
+  pageCount.innerText = `${index + 1} / ${pages.length}`;
+
+  document.querySelector(".memory-page").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 
 prevBtn.addEventListener("click", () => {
