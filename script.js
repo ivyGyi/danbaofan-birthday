@@ -15,6 +15,8 @@ const pageCount = document.getElementById("pageCount");
 
 let pageIndex = 0;
 
+let hasClickedPageButton = false;
+
 function showPage(index) {
   pages.forEach(page => page.classList.remove("active"));
   pages[index].classList.add("active");
@@ -24,13 +26,16 @@ function showPage(index) {
 
   pageCount.innerText = `${index + 1} / ${pages.length}`;
 
-  document.querySelector(".book").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
+  if (hasClickedPageButton) {
+    pages[index].scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
 }
 
 prevBtn.addEventListener("click", () => {
+    hasClickedPageButton = true;
     if (pageIndex > 0) {
         pageIndex--;
         showPage(pageIndex);
@@ -38,6 +43,7 @@ prevBtn.addEventListener("click", () => {
 });
 
 nextBtn.addEventListener("click", () => {
+    hasClickedPageButton = true;
     if (pageIndex < pages.length - 1) {
         pageIndex++;
         showPage(pageIndex);
