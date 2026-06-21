@@ -24,7 +24,7 @@ function showPage(index) {
 
   pageCount.innerText = `${index + 1} / ${pages.length}`;
 
-  document.querySelector(".memory-page").scrollIntoView({
+  document.querySelector(".book").scrollIntoView({
     behavior: "smooth",
     block: "start"
   });
