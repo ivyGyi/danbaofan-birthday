@@ -229,7 +229,7 @@ button:disabled {
     border: 6px solid transparent;
     animation: pagePop 0.45s ease;
     position: relative;
-    scroll-margin-top: 60px;
+    scroll-margin-top: 50px;
 }
 
 .book-page.active {
